@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+body{
+    background-image: linear-gradient(270deg,rgb(108, 223, 238),rgb(231, 240, 231));
+}
+div img{
+    width: 25vw;
+    height: 80vh;
+}
+#registration{
+    width: 70vw;
+    height: 80vh;
+    position:relative;
+    top: 10vh;
+    left: 15vw;
+    /* border: 2px solid rgb(0, 247, 255); */
+    display: flex;
+    flex-direction: row;
+    box-shadow: 5px -2px 5px rgb(35, 39, 39) ;
+}
+#enter{
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+#fname{
+    margin-top: 7vh;
+    margin-right: 1vw;
+    margin-left: 3vh;
+    height: 6vh;
+    width: 20vw;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+}
+#lname{
+    height: 6vh;
+    width: 20vw;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+}
+#user{
+    margin-top: 5vh;
+    height: 6vh;
+    width: 42vw;
+    margin-left: 3vh;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+}
+#key{
+    margin-top: 5vh;
+    height: 6vh;
+    width: 42vw;
+    margin-left: 3vh;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+}
+#contact{
+    margin-top: 5vh;
+    height: 6vh;
+    width: 42vw;
+    margin-left: 3vh;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+}
+select{
+    margin-top: 5vh;
+    height: 6vh;
+    width: 42.5vw;
+    margin-left: 3vh;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+}
+#btn{
+    margin-top: 6vh;
+    width: 15vw;
+    height: 7vh;
+    align-self: center;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    border-radius: 5%;
+}
+#btn:hover{
+    cursor: pointer;
+    background-color: rgb(2, 83, 2);
+    color: white;
+}
+select:hover{
+    cursor: pointer;
+    background-color: rgb(93, 3, 238);
+    color: white;
+}
+input:focus{
+    color: rgb(8, 4, 4);
+    outline: none;
+    border-color: transparent;
+    border-bottom: 2px solid rgb(8, 145, 236);
+    box-shadow: 0px 2px 2px rgb(51, 50, 50);
+}
+input:invalid{
+    border-color: red;
+}
+#copy{
+    align-self: flex-end;
+    font-family: monospace;
+    margin-bottom: 0px;
+    margin-right: 2px;
+    margin-top: 3vh;
+}

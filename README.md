@@ -62,7 +62,7 @@ nodemon server.js https://localhost:4443 MY_SECRET
   
 ## Run Locally
 
-http://localhost:8080/
+https://localhost:443/
 
 
 

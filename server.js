@@ -26,7 +26,7 @@ var express = require('express');
 const cookieParser = require('cookie-parser');
 var fs = require('fs');
 var session = require('express-session');
-var http= require('http');
+var https= require('https');
 var bodyParser = require('body-parser'); // Pull information from HTML POST (express4)
 var app = express(); // Create our app with express
 
@@ -52,7 +52,7 @@ var options = {
     key: fs.readFileSync('openvidukey.pem'),
     cert: fs.readFileSync('openviducert.pem')
 };
-http.createServer(options, app).listen(8080);
+https.createServer(options, app).listen(443);
 
 // Mock database
 var users = [{
@@ -103,9 +103,11 @@ db.once("open", () => console.log("Connected to database"));
 
 app.post('/',(req, res)=>{
 	res.render('login.ejs');
+	logincheck = false;
 });
 app.get('/',(req, res)=>{
 	res.render('login.ejs');
+	logincheck = false;
 });
 
 
@@ -169,6 +171,7 @@ var meet = "nonep";
 		return res.render("otp.ejs");
 	} else {
 		res.render("noreg.ejs", {
+			loggedcheck : "none",
 			name: "dear user",
 			message: "this number is already registered",
 			bod: "login",
@@ -266,30 +269,33 @@ arr1.push(mainname);
 			});
 			
 			// console.log(arr1);
-setTimeout(()=>{res.render("logged.ejs", {
+setTimeout(()=>{res.render("loginpage.ejs", {
 	dct:arr1,
 	loggedcheck : "block",
-	name: "",
+	name: loginuser,
 	message:
 		"Hi! " +
 		patientlogin.UserType +
 		" " +
 		loginuser +
 		" You are logged in",
-	bod: "login",
+	bod: "exiting",
 	linkm: "exit",
 	title: "Welcome"
-})},1000);		
+})},1000);	
+logincheck = true;	
 		} else {
 			console.log("wrong password");
 			res.render("noreg.ejs", {
 				loggedcheck : "none",
 				name: loginuser,
 				message: "your password is incorrect",
-				bod: "login",
+				bod: "exiting",
 				linkm: "Try again",
 				title: "Wrong password"
+
 			});
+			logincheck = false;	
 		}
 	} else if (doctorlogin != null) {
 		utype="doctor";
@@ -311,7 +317,7 @@ setTimeout(()=>{res.render("logged.ejs", {
 			linkm: "exit",
 			title: "Welcome"
 		})},1000)
-			
+		logincheck = true;	
 		}
 		else {
 			console.log("wrong password");
@@ -319,10 +325,11 @@ setTimeout(()=>{res.render("logged.ejs", {
 				name: loginuser,
 				loggedcheck : "none",
 				message: "your password is incorrect",
-				bod: "login",
+				bod: "exiting",
 				linkm: "Try again",
 				title: "Wrong password"
 			});
+			logincheck = false;	
 		}
 	} 
 	else if (stafflogin != null) {
@@ -341,10 +348,11 @@ setTimeout(()=>{res.render("logged.ejs", {
 					" " +
 					loginuser +
 					" You are logged in",
-				bod: "login",
+				bod: "exiting",
 				linkm: "exit",
 				title: "Welcome"
 			});
+			logincheck = true;	
 			
 		}
 		else {
@@ -353,10 +361,11 @@ setTimeout(()=>{res.render("logged.ejs", {
 				name: loginuser,
 				loggedcheck : "none",
 				message: "your password is incorrect",
-				bod: "login",
+				bod: "exiting",
 				linkm: "Try again",
 				title: "Wrong password"
 			});
+			logincheck = false;	
 		}
 	}
 	else {
@@ -369,10 +378,26 @@ setTimeout(()=>{res.render("logged.ejs", {
 			linkm: "Go register yourself",
 			title: "Not registered"
 		});
+		logincheck = false;	
 	}
 });
 app.get("/forget", async (req, res) => {
 	res.render("forget.ejs");
+});
+app.get("/exiting", (req, res) => {
+	logincheck = false;	
+res.render("login.ejs");
+});
+app.get("/regis", (req, res) => {
+	if(logincheck) {
+console.log("already logged in");
+
+	}
+	else if(logincheck == false) {
+			console.log("Going to regis page");
+	res.render('regis.ejs');
+	}
+
 });
 app.post("/forgetotp", async (req, res) => {
 	forgetnum=req.body.forgetnumber;
@@ -487,14 +512,12 @@ app.post('/logout', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
+	logincheck = false;
 	console.log("Going to login page");
 	res.render('login.ejs',);
 	
 });
-app.get("/regis", (req, res) => {
-	console.log("Going to regis page");
-	res.render('regis.ejs');
-});
+
 // app.post("/regis", (req, res) => {
 // 	console.log("Going to regis page");
 // 	res.redirect('regis.ejs');

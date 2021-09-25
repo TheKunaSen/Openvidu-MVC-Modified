@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    img{
+        width: 10vw;
+        height: 20vh;
+    }
+    table,tr,td {
+      border: 2px solid black;
+      border-collapse: collapse;
+    }
+    .image{
+        width: 10vw !important;
+        height:20vh;
+    }
+    .apptrow{
+        width: 50vw;
+    }
+  </style>
+
+<body>
+  <!-- <center> <h1> <%= message %></h1>
+   
+
+  </center> -->
+  <p id="txt"><%= dct %></p>
+
+  
+  <form action="/logind/meet" method="post">
+    <table style="width: 100%; height: 100%">
+      <tr id="personal" style="height: 15vh;">
+        <td class="image">
+            <div>
+                <img src="img.jpg" alt="Patient" srcset="">
+            </div>
+        </td>
+        <td style="width: 50vw">
+           Name  - <%= name %>
+          <div>Reg Id: </div>
+          <div>age: </div>
+          <div>aadhar: </div>
+        </td>
+        <td style="width: 40vw;">Address: abcdefgijklmnopqrstuvwxyz</td>
+      </tr>
+      <tr>
+        <th colspan="3">
+            <h1>Recent checkups</h1>
+        </th>
+      </tr>
+      <tr height="200px;">
+        <td colspan="2">Checkup 1</td>
+        <td >Checkup 2</td>
+      </tr>
+      <tr height="400px;">
+        <th class="apptrow">
+          <div>
+            <h1>Make Appoinment</h1>
+            <ul>
+              <li>
+                Doctor:
+                <select id="opts" name="opts">
+
+                </select><br><br>
+             
+              </li>
+              <li>
+                  <label for="appt_date">Appoinment Date:</label>
+                  <input type="date" name="appt_date" id="appt_date" required>
+              </li>
+              <li>
+                <label for="appt">Appointment time:</label>
+                <input
+                  type="time"
+                  name="appt"
+                  id="appt"
+                  min="09:00"
+                  max="14:00"
+                  required
+                />
+                <br><small>Kiosk remains open from 9 AM to 3PM</small>
+
+              </li>
+            </ul>
+                <input type="submit" value="Meet" style="display:<%= loggedcheck %>;"> <br>
+            <a href="<%= bod %>"> <%= linkm %> </a>
+            </form>
+          </div>
+        </th>
+        <th>
+          <div>
+            <h1>Prescription</h1>
+            <button type="submit">Print</button>
+          </div>
+        </th>
+        <th>
+          <h1>Chatbot</h1>
+          <button>Use Chatbot</button>
+        </th>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <div>
+            <h2>Any Comment</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur,
+              perspiciatis. Nihil, magni consequatur! Blanditiis, optio maiores
+              alias ex dolore sint est voluptate quod doloremque doloribus
+              provident delectus, porro natus quasi sit culpa. Expedita enim
+              quasi eos, facere ipsa sint, soluta libero voluptatem nobis rerum
+              esse consectetur a mollitia odio quas ducimus error culpa. Atque,
+              cumque ut ipsum perspiciatis rerum cum eius molestias esse
+              obcaecati repellendus sint quia sunt saepe delectus porro a
+              voluptate qui cupiditate quo blanditiis nemo deserunt pariatur aut
+              aliquam? Vitae placeat dignissimos non. Modi fugiat a ut,
+              reiciendis ipsam animi optio quisquam maxime tempore natus in et
+              quasi reprehenderit neque. Quidem praesentium saepe, doloribus ex
+              mollitia quaerat tempora labore recusandae. Suscipit, est! Beatae
+              aperiam fugit adipisci dicta?
+            </p>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <script>
+        var per=document.getElementById("txt");
+        const changed=per.innerHTML;
+        const select=document.getElementById("opts");
+        per.style.display="none"
+        console.log(changed);
+        var words = changed.split(",");
+        console.log(words);
+        words.forEach((word)=>{
+          var opt = document.createElement('option');
+          opt.innerHTML =word;
+          opt.value=word.split(" ")[0];
+          select.appendChild(opt);
+        })
+        per.innerHTML=changed.replaceAll(",", " ");
+      </script>
+
+
+</body>
+</html>

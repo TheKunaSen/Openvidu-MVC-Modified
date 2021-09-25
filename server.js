@@ -488,12 +488,13 @@ app.post("/newpass", async (req, res) => {
 	};
 	updatepass(usernumber._id);
 	res.render("noreg.ejs", {
+		loggedcheck: "none",
 		name: "dear "+ usernumber.username,
 		message: " your password is updated successfully",
 		bod: "login",
 		linkm: "Go to login",
-		title: "password updated",
-		loggedcheck: "hidden"
+		title: "password updated"
+		
 	});
 });
 
